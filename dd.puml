@@ -1,0 +1,52 @@
+@startuml
+class hello.core.member.MemberApp {
++ {static} void main(String[])
+}
+
+interface hello.core.member.MemberService {
+~ void join(Member)
+~ Member findMember(Long)
+}
+
+class hello.core.member.MemberServiceImpl {
+- MemberRepository memberRepository
++ void join(Member)
++ Member findMember(Long)
+}
+
+
+class hello.core.member.Member {
+- Long id
+- String name
+- Grade grade
++ Long getId()
++ void setId(Long)
++ String getName()
++ void setName(String)
++ Grade getGrade()
++ void setGrade(Grade)
+}
+
+
+class hello.core.member.MemoryMemberRepository {
+- {static} Map<Long,Member> store
++ void save(Member)
++ Member findById(Long)
+}
+
+
+enum hello.core.member.Grade {
++  BASIC
++  VIP
+}
+
+interface hello.core.member.MemberRepository {
+~ void save(Member)
+~ Member findById(Long)
+}
+
+
+
+hello.core.member.MemberService <|.. hello.core.member.MemberServiceImpl
+hello.core.member.MemberRepository <|.. hello.core.member.MemoryMemberRepository
+@enduml
